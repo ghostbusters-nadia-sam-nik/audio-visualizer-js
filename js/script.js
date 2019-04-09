@@ -93,11 +93,11 @@ function draw() {
         line( mapBass, radius/2, 0, radius );
         stroke(73,249,255, 40);
         line( mapLowMid, radius/2, 0, radius );
-        stroke(70,250,255, 60);
+        stroke(70,250,255, 80);
         line( mapMid, radius/2, 0, radius );
-        stroke(65,240,255, 80);
+        stroke(65,240,255, 40);
         line( mapHighMid, radius/2, 0, radius );
-        stroke(255,213,73, 100);
+        stroke(255,213,73, 20);
         line( mapTreble, radius/2, 0, radius );
 
     }
