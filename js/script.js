@@ -1,40 +1,66 @@
-//
-// function setup() {
-//     createCanvas(640, 480);
-// }
-//
-// function draw() {
-//     if (mouseIsPressed) {
-//         fill(0);
-//     } else {
-//         fill(255);
-//     }
-//     ellipse(mouseX, mouseY, 80, 80);
-// }
+///////////////////////
+/// Load Media File ///
+///////////////////////
+
 
 
 function preload() {
     soundFormats('mp3', 'ogg');
-    sound = loadSound('./audio/sound1.mp3');
+    sound = loadSound('./audio/sound2.mp3');
 }
 
+
+
+
+
+/////////////////////
+/// Set up Canvas ///
+/////////////////////
 
 function setup() {
-    var cnv = createCanvas(100, 100);
+
+    var cnv = createCanvas(900, 300);
     cnv.mouseClicked(togglePlay);
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
+    cnv.position(x, y);
     fft = new p5.FFT();
-    sound.amp(0.2);
+    slider = createSlider(0, 1, 0.5, 0.01)
+
+    ////////////////////////////////
+    /// Analyze: Bass, Mid, High ///
+    ////////////////////////////////
+
+    var soundBass       = fft.getEnergy("bass");
+    var soundMid        = fft.getEnergy("mid");
+    var soundLowMid     = fft.getEnergy("lowMid");
+    var soundHighMid    = fft.getEnergy("highMid");
+    var soundTreble     = fft.getEnergy("treble");
+
+    ////////////////////////////////
+    /// Map: Bass, Mid, High     ///
+    ////////////////////////////////
+
+    var mapBass         = map(soundBass, 0, 255, -100, 100 );
+    var mapMid          = map(soundMid, 0, 255, -150, 150 );
+    var mapLowMid       = map(soundLowMid,0, 255, -200, 100 );
+    var mapHighMid      = map(soundHighMid, 0, 255, -100, 150 );
+    var mapTreble       = map(soundTreble, 0, 255, -100, 250 );
+
 }
+
 
 function draw() {
 
-    background(000);
 
-    var spectrum = fft.analyze();
-
-
+    sound.setVolume(slider.value()); /// Volume Slider ///
+    background(0);
     noStroke();
-    fill(0, 255, 0); // spectrum is green
+    var spectrum = fft.analyze(); /// Global Analyzer ///
+
+    fill(0, 255, 0); /// Spectrum Color ////
+
+
     for (var i = 0; i < spectrum.length; i++) {
         var x = map(i, 0, spectrum.length, 0, width);
         var h = -height + map(spectrum[i], 0, 255, height, 0);
@@ -42,6 +68,7 @@ function draw() {
     }
 
     var waveform = fft.waveform();
+
     noFill();
     beginShape();
     stroke(255, 0, 0); // waveform is red
@@ -56,7 +83,8 @@ function draw() {
     text('click to play/pause', 4, 10);
 }
 
-// fade sound if mouse is over canvas
+/// Play / Pause Option ///
+
 function togglePlay() {
     if (sound.isPlaying()) {
         sound.pause();
