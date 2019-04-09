@@ -4,10 +4,8 @@
 
 function preload() {
     soundFormats('mp3', 'ogg');
-    sound = loadSound('./audio/sound3.mp3');
+    sound = loadSound('./audio/sound1.mp3');
 }
-
-
 
 /////////////////////
 /// Set up Canvas ///
@@ -22,10 +20,13 @@ function setup() {
     cnv.position(x, y);
     fft = new p5.FFT();
     slider = createSlider(0, 1, 0.5, 0.01);
-
-
 }
 
+function mousePressed() {
+    ele.showControls();
+    background(0);
+    text('Controls Shown', width / 2, height / 2);
+}
 
 function draw() {
 
@@ -55,19 +56,19 @@ function draw() {
     var mapTreble       = map(soundTreble, 0, 255, -200, 0 );
 
     // Define in how many pieces you want to divide the circle
-    var pieces = 32;
+    var pieces = 64; // Number of elements around the circle
+    var radius = 25; // Circle's Radius
 
-    // Circle's radius
-    var radius = 150;
+    translate( width/2, height/2 ); // Move the origin to the center of the canvas
 
-    // Move the origin to the center of the canvas
-    translate( width/2, height/2 );
 
-    // The centered circle
+    ///////////////////////////
+    /// The centered circle ///
+    ///////////////////////////
 
-    stroke(0,191,255);
-    fill(55);
-    ellipse( 0, 0, radius );
+    stroke(0,191,255, 10); // radius color stroke
+    fill(55); // middle circle / radius color fill
+    ellipse( 0, 0, radius ); // originating circle for all lines
 
     // For each piece draw a line
     for( var i = 0; i < pieces; i++ ) {
@@ -75,13 +76,9 @@ function draw() {
         // Rotate the point of origin
         rotate( TWO_PI / pieces );
 
-        // Draw the red lines
-        stroke(0,191,255);
+        // Draw lines to canvas
+        stroke(0,191,255, 10);
         line( 10, radius/2, 0, radius );
-
-        //Optionally also draw to the opposite direction
-        // stroke( 0 );
-        // line( -10, radius/2, 0, radius );
     }
 
 
@@ -89,30 +86,21 @@ function draw() {
 
         rotate( TWO_PI / pieces );
 
-        // Draw the bass lines
+        /////////////////////////
+        /// Draw canvas lines ///
+        /////////////////////////
+        stroke(255,73,61, 20);
         line( mapBass, radius/2, 0, radius );
-
-        // // Draw the mid lines
+        stroke(73,249,255, 40);
         line( mapLowMid, radius/2, 0, radius );
-
-        // Draw the mid lines
+        stroke(70,250,255, 60);
         line( mapMid, radius/2, 0, radius );
-
-        // // Draw the mid lines
+        stroke(65,240,255, 80);
         line( mapHighMid, radius/2, 0, radius );
-
-        // Draw the treble lines
+        stroke(255,213,73, 100);
         line( mapTreble, radius/2, 0, radius );
 
     }
-
-
-
-
-
-
-
-
 
     // fill(0, 255, 0); /// Spectrum Color ////
     //
