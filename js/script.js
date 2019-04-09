@@ -4,7 +4,7 @@
 
 function preload() {
     soundFormats('mp3', 'ogg');
-    sound = loadSound('./audio/sound1.mp3');
+    sound = loadSound('./audio/sound4.mp3');
 }
 
 /////////////////////
@@ -81,7 +81,6 @@ function draw() {
         line( 10, radius/2, 0, radius );
     }
 
-
     for( var i = 0; i < pieces; i++ ) {
 
         rotate( TWO_PI / pieces );
@@ -89,7 +88,7 @@ function draw() {
         /////////////////////////
         /// Draw canvas lines ///
         /////////////////////////
-        stroke(255,73,61, 20);
+        stroke(255,73,61, 80);
         line( mapBass, radius/2, 0, radius );
         stroke(73,249,255, 40);
         line( mapLowMid, radius/2, 0, radius );
@@ -97,33 +96,9 @@ function draw() {
         line( mapMid, radius/2, 0, radius );
         stroke(65,240,255, 40);
         line( mapHighMid, radius/2, 0, radius );
-        stroke(255,213,73, 20);
+        stroke(255,213,73, 80);
         line( mapTreble, radius/2, 0, radius );
-
     }
-
-    // fill(0, 255, 0); /// Spectrum Color ////
-    //
-    //
-    // for (var i = 0; i < spectrum.length; i++) {
-    //     var x = map(i, 0, spectrum.length, 0, width);
-    //     var h = -height + map(spectrum[i], 0, 255, height, 0);
-    //     rect(x, height, width / spectrum.length, h)
-    // }
-    //
-    // var waveform = fft.waveform();
-    //
-    // noFill();
-    // beginShape();
-    // stroke(255, 0, 0); // waveform is red
-    // strokeWeight(1);
-    //
-    // for (var i = 0; i < waveform.length; i++) {
-    //     var x = map(i, 0, waveform.length, 0, width);
-    //     var y = map(waveform[i], -1, 1, 0, height);
-    //     vertex(x, y);
-    // }
-    // endShape();
 
 
 }
