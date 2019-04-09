@@ -4,7 +4,7 @@
 
 function preload() {
     soundFormats('mp3', 'ogg');
-    sound = loadSound('./audio/sound1.mp3');
+    sound = loadSound('./audio/sound3.mp3');
 }
 
 
@@ -65,7 +65,8 @@ function draw() {
 
     // The centered circle
 
-    stroke(55);
+    stroke(0,191,255);
+    fill(55);
     ellipse( 0, 0, radius );
 
     // For each piece draw a line
