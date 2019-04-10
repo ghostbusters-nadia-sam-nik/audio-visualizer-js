@@ -99,8 +99,6 @@ function draw() {
         stroke(255,213,73, 80);
         line( mapTreble, radius/2, 0, radius );
     }
-
-
 }
 
 /// Play / Pause Option ///
