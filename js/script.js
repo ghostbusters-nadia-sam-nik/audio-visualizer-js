@@ -22,11 +22,11 @@ function setup() {
     slider = createSlider(0, 1, 0.5, 0.01);
 }
 
-function mousePressed() {
-    ele.showControls();
-    background(0);
-    text('Controls Shown', width / 2, height / 2);
-}
+// function mousePressed() {
+//     ele.showControls();
+//     background(0);
+//     text('Controls Shown', width / 2, height / 2);
+// }
 
 function draw() {
 
